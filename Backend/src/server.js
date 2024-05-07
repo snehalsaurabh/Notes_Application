@@ -14,14 +14,26 @@ mongoose.connect(process.env.URL).then(function(){
         res.send("This is the Home page");
     });
 
-    // Notes Route
-    app.get('/notes', async function(req, res) {
+    // Notes List Route
+    app.get('/notes/list', async function(req, res) {
         var notes = await Note.find();
         res.json(notes);
-    });
+    });   
 
-    // Starting the server on a PORT
-    app.listen(5000, function(){
-        console.log("Server started at Port: 5000");
-    });
+    app.get('/notes/add', async function(req, res) {
+        const newNote = new Note({
+            id: "00001",
+            userid: "temp@gmail.com",
+            title: "My first note",
+            content: "This is my first note",
+        });
+        await newNote.save();
+
+        const response = {message: "New note has been created"};
+        res.json(response);
+    });   
+});
+// Starting the server on a PORT
+app.listen(5000, function(){
+    console.log("Server started at Port: 5000");
 });
