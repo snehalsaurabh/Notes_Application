@@ -1,9 +1,11 @@
 // Initialization
+const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const Note = require('./models/Note');
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const app = express();
 
 mongoose.connect(process.env.URL).then(function(){
@@ -13,8 +15,9 @@ mongoose.connect(process.env.URL).then(function(){
     });
 
     // Notes Route
-    app.get('/notes', function(req, res) {
-        res.send("This is the Notes page");
+    app.get('/notes', async function(req, res) {
+        var notes = await Note.find();
+        res.json(notes);
     });
 
     // Starting the server on a PORT
