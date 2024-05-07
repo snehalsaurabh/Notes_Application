@@ -1,3 +1,0 @@
-NotesApp_data.txt
-NotesApp_data
-backend/.env
