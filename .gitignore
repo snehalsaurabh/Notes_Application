@@ -1,3 +1,5 @@
 NotesApp_data.txt
 NotesApp_data
 backend/.env
+backend/node_modules/
+backend/node_modules/*
